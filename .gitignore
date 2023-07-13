@@ -1,4 +1,4 @@
-/node-modules
+node-modules
 yarn.lock
 yarn.error.log
 package-lock.json
