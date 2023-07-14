@@ -32,7 +32,7 @@
  async function main() {
   const auth_res = await bitgo.authenticate({
     username: "salesdemo5@bitgo.com",
-    password: "bitgodemo00",
+    password: "xxxx",
     otp: "000000",
   });
 
