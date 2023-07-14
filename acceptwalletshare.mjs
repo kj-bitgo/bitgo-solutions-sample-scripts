@@ -32,7 +32,7 @@
  const shareId = '63d358026d1538000740f2e53ca204b6';
  
  // TODO: set your passphrase for your new wallet here
- const passphrase = 'bitgodemo00';
+ const passphrase = 'xxxxxx';
  
  async function main() {
   const auth_res = await bitgo.authenticate({
