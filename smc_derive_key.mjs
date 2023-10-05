@@ -19,21 +19,24 @@
 
 import { BitGoAPI } from '@bitgo/sdk-api';
 import { Btc } from '@bitgo/sdk-coin-btc';
+import { randomBytes } from 'crypto';
  
 const bitgo = new BitGoAPI({
   env: 'test', // Change this to env: 'production' when you are ready for production
 });
 
-const master_key = 'xpub661MyMwAqRbcG13Y82br56R7kVkuPgyjGNpwpup3pqJV21YReNEZAav8kLX3KBsQSg3v2khbvvQtX4WNHjaiaAJifvcTzKLK7xt2AEyY8GX';
-const seed = '0/0';
+const pubkey = process.env.BITGO_SMC_XPUB;
+const prvkey = process.env.BITGO_SMC_XPRV;
+const key = pubkey ? pubkey : bitgo.decrypt({input: prvkey, password: process.env.BITGO_SMC_PASSWORD});
+const seed = randomBytes(12).toString('hex');
 
 bitgo.register('btc', Btc.createInstance);
       
 async function main() {
 
-  console.log(master_key, seed);
+  console.log(`Deriving child key for: ${key}\nWith seed: ${seed}`);
 
-  const derived_key = bitgo.coin('btc').deriveKeyWithSeed({key: master_key, seed: seed});
+  const derived_key = bitgo.coin('btc').deriveKeyWithSeed({key, seed});
 
   console.log(derived_key);
 }
