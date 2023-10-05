@@ -1,18 +1,5 @@
 /**
- * Create a multi-sig wallet at BitGo.
- * This makes use of the convenience function generateWallet
- *
- * This tool will help you see how to use the BitGo API to easily create a wallet.
- * In this form, it creates 2 keys on the host which runs this example.
- * It is HIGHLY RECOMMENDED that you GENERATE THE KEYS ON SEPARATE MACHINES for real money wallets!
- *
- * To perform more advanced features, such as encrypting keys yourself, please look at createWalletAdvanced.js
- *
- * Copyright 2022, BitGo, Inc.  All Rights Reserved.
- */
-
-/**
- * Add Low Fee webhook to a wallet.
+ * Derive child keys to use as input for SMC wallet.
  *
  * Copyright 2022 BitGo, Inc.  All Rights Reserved.
  */
