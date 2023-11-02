@@ -2,6 +2,7 @@
   "dependencies": {
     "@bitgo-beta/bitgo": "^14.2.1-beta.23",
     "@bitgo-beta/sdk-lib-mpc": "^8.2.0",
+    "@bitgo/smart-contracts": "^2.4.0",
     "bitgo": "^18.2.0",
     "dotenv": "^16.3.1",
     "minimist": "^1.2.8",
