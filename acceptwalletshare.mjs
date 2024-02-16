@@ -29,7 +29,7 @@
  const basecoin =  bitgo.coin("ofc");
 
  // TODO: set a label for your new wallet here
- const shareId = '63d358026d1538000740f2e53ca204b6';
+ const shareId = 'xxxx';
  
  // TODO: set your passphrase for your new wallet here
  const passphrase = 'xxxxxx';

@@ -67,7 +67,7 @@ async function sendBitGoTx() {
         await bitGoWallet.sendMany(params);
 
     console.log("Transfer:")
-    console.log(JSON.stringify(transaction));
+    console.log(JSON.stringify(transaction, null, 2));
       
 }
 

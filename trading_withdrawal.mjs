@@ -7,7 +7,7 @@
  * Copyright 2022, BitGo, Inc.  All Rights Reserved.
  */
 import { BitGoAPI } from '@bitgo/sdk-api';
-import { coins } from '@bitgo/sdk-core';
+import { coins, CoinFactory } from '@bitgo/sdk-core';
 import { coins as coinStatics } from '@bitgo/statics';
 
 const bitgo = new BitGoAPI({
@@ -15,6 +15,7 @@ const bitgo = new BitGoAPI({
   env: 'test'
 });
 
+const factory = new CoinFactory();
 // Build a trading token configuration to work with the desired backing coin
 
 const tbtcConfig = coinStatics.get('tbtc');
@@ -55,6 +56,7 @@ bitgo.register(ofcTbtcConfig.coin, coins.OfcToken.createTokenConstructor(ofcTbtc
 bitgo.register(ofcTusdConfig.coin, coins.OfcToken.createTokenConstructor(ofcTusdConfig));
 bitgo.register(ofcGtethConfig.coin, coins.OfcToken.createTokenConstructor(ofcGtethConfig));
 bitgo.register('ofc', coins.Ofc.createInstance);
+bitgo.register('ofcusdc', factory.getInstance(bitgo, "usdc"));
 
 const ofcCoin = bitgo.coin('ofc');
 const ofcTbtcCoin = bitgo.coin('ofctbtc');

@@ -23,22 +23,20 @@
    env: 'test', // Change this to env: 'production' when you are ready for production
  });
  
- // TODO: set a label for your new wallet here
- const label = 'Example Test Wallet - KJ';
- 
- // TODO: set your passphrase for your new wallet here
- const passphrase = 'test_wallet_passphrase';
- 
  async function main() {
   const auth_res = await bitgo.authenticate({
-    username: "salesdemo5@bitgo.com",
-    password: "xxxx",
+    username: process.env.BITGO_USERNAME,
+    password: process.env.BITGO_PASSWORD,
     otp: "000000",
   });
 
+  const accesstokens = await bitgo.listAccessTokens();
+  console.log(JSON.stringify(accesstokens));
+  console.log()
+
   const access_token = await bitgo.addAccessToken({
     otp: "000000",
-    label: "KJ Admin Access Token - 1",
+    label: "Admin Access Token",
     scope: [
       "openid",
       "portfolio_view",
@@ -56,11 +54,7 @@
     
   });
   console.log(access_token);
-
-
-  const removed = bitgo.removeAccessToken({id: access_token.id,});
-
-  const tokenList = bitgo.listAccessTokens();
+  const removed = await bitgo.removeAccessToken({id: access_token.id,});
  }
  
  main().catch(e => console.log(e));

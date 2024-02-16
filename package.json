@@ -1,10 +1,12 @@
 {
   "dependencies": {
-    "@bitgo-beta/bitgo": "^14.2.1-beta.23",
-    "@bitgo-beta/sdk-lib-mpc": "^8.2.0",
-    "@bitgo/smart-contracts": "^2.4.0",
-    "bitgo": "^18.2.0",
+    "@ethereumjs/common": "^4.2.0",
+    "@ethereumjs/tx": "^5.2.1",
+    "@ethereumjs/util": "^9.0.2",
+    "axios": "^1.6.2",
+    "bitgo": "^28.0.0",
     "dotenv": "^16.3.1",
+    "ethereumjs-wallet": "^0.6.4",
     "minimist": "^1.2.8",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.3"

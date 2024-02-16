@@ -21,7 +21,7 @@ const env =params['e'] === undefined ? 'test' : params['e'];
 const prv = params['k'];
 
 const bitgo = new BitGoAPI({
-  accessToken: 'v2xedb5873cda598b35b2aec5cb1264cabfd206ceb660bfb4a6f2e7a29fce45c22c',
+  accessToken: process.env.BITGO_ACCESS_TOKEN,
   env: env,
 });
 

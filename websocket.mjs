@@ -6,17 +6,16 @@ async function main() {
 
     let socket = new WebSocket(baseURL, {
         headers: {
-            Authorization: 'Bearer xxxxxx'
+            Authorization: `Bearer ${process.env.BITGO_ACCESS_TOKEN}`
         }
     });
 
     socket.onopen = (event) =>{
         console.log("Websocket connection established.");
         const msg = {
-            type: 'subscribe',
-            accountId: '5ef523b7ab6b7f7b00b9513a0ac0a4e8',
-            channel: 'level2',
-            productId: 'TBTC-TUSD*'
+            "type": "subscribe",
+            "channel": "orders",
+            "accountId": process.env.BITGO_TRADE_ACCOUNT
         }
         socket.send(JSON.stringify(msg));
     };

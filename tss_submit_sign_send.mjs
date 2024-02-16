@@ -8,26 +8,21 @@
  */
 import { BitGoAPI } from '@bitgo/sdk-api';
 import { Gteth, Erc20Token } from '@bitgo/sdk-coin-eth';
-import { Polygon, PolygonToken } from '@bitgo/sdk-coin-polygon';
 
 const bitgo = new BitGoAPI({
   accessToken: process.env.BITGO_ACCESS_TOKEN,
   env: 'test'
 });
 
-bitgo.register('polygon', Polygon.createInstance);
-PolygonToken.createTokenConstructors().forEach(({name, coinConstructor}) => {
-  bitgo.register(name, coinConstructor);
+bitgo.register('gteth', Gteth.createInstance);
+Erc20Token.createTokenConstructors().forEach(({name, coinConstructor}) => {
+  if(name==='gterc6dp'){
+    bitgo.register(name, coinConstructor);
+  }
 });
 
-const polygon = bitgo.coin('polygon');
-const usdcPoly = bitgo.coin('polygon:usdcv2');
-
-const wallet = await polygon.wallets().get({ id: walletId });
-const usdcWalletObj = usdcPoly.wallets().get({ id: walletId });
-
-wallet.createAddress();
-usdcPoly.sendMany();
+const ethCoin = bitgo.coin('gteth');
+const usdtToken = bitgo.coin('gterc6dp');
 
 // TODO: set the id of the wallet
 const walletId = process.env.BITGO_WALLET_ID
@@ -38,25 +33,28 @@ const passphrase = 'xxxxxx';
 async function main() {
 
   // Search for trading wallet object using the wallet ID
-  const wallet = await usdcPoly.wallets().get({ id: walletId });
+  const wallet = await ethCoin.wallets().get({ id: walletId });
 
   // Build Withdrawal Transaction parameters
   const params = {
-  recipients: [{
-    amount: '1000000',
-    address: '0xd8e7060B6282d025E3Dff944AD07a7ECb6054449',
-  }],
-  walletPassphrase: passphrase,  
+      recipients: [
+          {
+              "address": "0xCeAcEcD11f128bdD47BB5B18B349dC0eB56d7886",
+              "amount": "10000000000000",
+              "data": "0xf340fa01000000000000000000000000736786c87b52b5951bca204c4374c11d0d75925c"
+          }
+      ],
+      type: "transfer"
   };
 
   // Initiate Withdrawal Transaction
-  const pending = await wallet.sendMany(params);
+  const pending = await wallet.prebuildTransaction(params);
 
   // Search for transactions pending approval
   const ptxs = await wallet.transfers({ 
   state: 'pendingApproval'
-  })
-
+  });
+  
   console.log(pending);
   console.log(ptxs);
 }

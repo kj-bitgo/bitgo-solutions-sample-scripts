@@ -8,7 +8,6 @@
  */
 import { BitGoAPI } from '@bitgo/sdk-api';
 import { Btc, Tbtc } from '@bitgo/sdk-coin-btc';
-import { PendingApprovals } from 'bitgo';
 
 const bitgo = new BitGoAPI({
   accessToken: process.env.BITGO_ACCESS_TOKEN,
